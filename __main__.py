@@ -3,7 +3,7 @@ from modules import *
 PKG_FOLDER = "~/.config/sublime-text-3/Packages/"
 
 
-
+search_pkg('SublimePythonIDE')
 
 
 

@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from requests import get
-import re
 from .utilities import int_installs, convert_spaces, is_github, download_link_github
 
 
@@ -33,7 +32,7 @@ def __page_exists(url):
 	req = get(url)
 	return req.status_code == 200
 
-def get_packages_info(search_term):
+def search_pkg(search_term):
 
 	soups = [ e.find_all("li", attrs={"class": "package"}) for e in __get_soups(f'{__URL_SEARCH}{search_term}')]
 	res = []

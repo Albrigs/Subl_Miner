@@ -1,5 +1,5 @@
 from .web_querys import \
-get_url_download,get_packages_info, \
+get_url_download,search_pkg, \
 download_from_url
 
 from .utilities import unzip

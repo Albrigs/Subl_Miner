@@ -2,11 +2,12 @@ from collections import Counter
 from zipfile import ZipFile
 from os import remove as delete_file
 from os import rename, listdir
+from re import sub as subst
 
 def int_installs(txt):
 	txt = txt.lower()
 	k = Counter(txt)['k']
-	quantity = int(re.sub('[^0-9]','', txt))
+	quantity = int(subst('[^0-9]','', txt))
 	quantity = quantity * pow(1000, k)
 	return quantity
 
