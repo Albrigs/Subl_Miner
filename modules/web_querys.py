@@ -1,11 +1,14 @@
 from bs4 import BeautifulSoup
 from requests import get
-from .utilities import int_installs, convert_spaces, is_github, download_link_github
+from .utilities import int_installs, convert_spaces, is_github, download_link_github, unzip
+from os.path import abspath
 
 
 __URL_BASE = 'https://packagecontrol.io/'
 __URL_SEARCH = f'{__URL_BASE}search/'
 __URL_PACKAGES = f'{__URL_BASE}packages/'
+__PKGS_FOLDER = abspath("~/.config/sublime-text-3/Packages/")+'/'
+
 
 
 def __get_one_soup(url):
@@ -74,8 +77,10 @@ def get_url_download(url):
 
 
 
-def download_from_url(url, file_path, chunk_size=128):
-    req = get(url, stream=True)
-    with open(file_path, 'wb') as file:
-        for chunk in req.iter_content(chunk_size=chunk_size):
-            file.write(chunk)
+def download_from_url(url, chunk_size=128):
+	req = get(url, stream=True)
+	tmp_zip = __PKGS_FOLDER+'tmp.zip'
+	with open( tmp_zip, 'wb') as file:
+		for chunk in req.iter_content(chunk_size=chunk_size):
+			file.write(chunk)
+	unzip(tmp_zip)

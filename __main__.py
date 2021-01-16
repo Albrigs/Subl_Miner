@@ -1,11 +1,8 @@
-from pprint import pprint
 from modules import *
-PKG_FOLDER = "~/.config/sublime-text-3/Packages/"
 
 
-search_pkg('SublimePythonIDE')
 
-
+download_from_url('https://github.com/jugyo/SublimeColorSchemeSelector/archive/master.zip')
 
 """
 	SublimePythonIDE
@@ -15,4 +12,5 @@ search_pkg('SublimePythonIDE')
 	SublimeColorSchemeSelector
 	SideBarEnhancements
 	Sublime-AdvancedNewFile
+	Normalize Indentation
 """
