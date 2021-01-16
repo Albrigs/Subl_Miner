@@ -1,6 +1,5 @@
 from .web_querys import \
-get_one_soup, get_soups, get_home_page,get_packages_info, \
-page_exists,\
-download_url
+get_url_download,get_packages_info, \
+download_from_url
 
-from .utilities import is_github, download_link_github, unzip
+from .utilities import unzip

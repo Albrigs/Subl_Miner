@@ -1,5 +1,7 @@
 from collections import Counter
 from zipfile import ZipFile
+from os import remove as delete_file
+from os import rename, listdir
 
 def int_installs(txt):
 	txt = txt.lower()
@@ -16,5 +18,14 @@ def download_link_github(url):
 	return link
 
 def unzip(path_in, path_out):
+	old_content=set(listdir())
+	
 	with ZipFile(path_in, 'r') as file:
 	    file.extractall(path_out)
+	delete_file(path_in)
+	
+	new_content=set(listdir())
+
+	new_folder = list(new_content - old_content)[0]
+
+	rename(new_folder, new_folder.replace('-master',''))
