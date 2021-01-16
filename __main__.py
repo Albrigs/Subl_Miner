@@ -55,7 +55,20 @@ def get_packages_info(search_term):
 				'url': URL_PACKAGES+convert_spaces(name)
 
 				})
-	pprint(res)
 	return res
 
-get_packages_info('python')
+def get_home_page(url):
+	list_item = get_one_soup(url).find('li', attrs={'class':'homepage'})
+	link = list_item.find('a')['href']
+	return link
+
+def download_link_github(url):
+	link = f'{url}/archive/master.zip'
+	return link
+
+def is_github(url):
+	return url.startswith('https://github.com/')
+
+def page_exists(url):
+	req = requests.get(url)
+	return req.status_code == 200
