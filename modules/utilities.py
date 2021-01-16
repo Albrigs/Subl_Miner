@@ -1,5 +1,5 @@
 from collections import Counter
-
+from zipfile import ZipFile
 
 def int_installs(txt):
 	txt = txt.lower()
@@ -15,3 +15,6 @@ def download_link_github(url):
 	link = f'{url}/archive/master.zip'
 	return link
 
+def unzip(path_in, path_out):
+	with ZipFile(path_in, 'r') as file:
+	    file.extractall(path_out)
