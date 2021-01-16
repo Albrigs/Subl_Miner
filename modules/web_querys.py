@@ -57,3 +57,10 @@ def get_home_page(url):
 def page_exists(url):
 	req = get(url)
 	return req.status_code == 200
+
+
+def download_url(url, file_path, chunk_size=128):
+    req = get(url, stream=True)
+    with open(file_path, 'wb') as file:
+        for chunk in req.iter_content(chunk_size=chunk_size):
+            file.write(chunk)
