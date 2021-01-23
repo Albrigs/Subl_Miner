@@ -55,7 +55,7 @@ By {e['author']} | Downloads: {e['installs']}
 	response = ""
 	
 	while "<<" in response or ">>" in response or not response:
-		response = prompt(questions[cur_page])
+		response = prompt(questions[cur_page])['package']
 
 		if "<<" in response: cur_page -= 1
 		if ">>" in response: cur_page += 1
