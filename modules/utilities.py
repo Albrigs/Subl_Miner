@@ -3,6 +3,7 @@ from zipfile import ZipFile
 from os import remove as delete_file
 from os import rename, listdir
 from re import sub as subst
+from time import sleep
 
 def int_installs(txt):
 	txt = txt.lower()
@@ -19,14 +20,17 @@ def download_link_github(url):
 	return link
 
 def unzip(path_in, path_out):
-	old_content=set(listdir())
+	old_content=set(listdir(path_out))
 	
 	with ZipFile(path_in, 'r') as file:
 	    file.extractall(path_out)
 	delete_file(path_in)
 	
-	new_content=set(listdir())
+	new_content=set(listdir(path_out))
 
-	new_folder = list(new_content - old_content)[0]
+	new_folder = list(new_content - old_content)
+	new_folder = new_folder[0]
+	new_folder = path_out+'/'+new_folder
+
 
 	rename(new_folder, new_folder.replace('-master',''))
