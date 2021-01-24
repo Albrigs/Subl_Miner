@@ -36,6 +36,14 @@ def __page_exists(url):
 	req = get(url)
 	return req.status_code == 200
 
+def get_first_pkg(search_term):
+	soup = __get_one_soup(f'{__URL_SEARCH}{search_term}')
+	soup = soup.find("li", attrs={"class": "package"})
+	name = soup.text.split('by')[0].strip()
+	res = __URL_PACKAGES+convert_spaces(name)
+	res = get_url_download(res)
+	return name, res
+
 def search_pkg(search_term):
 
 	soups = [ e.find_all("li", attrs={"class": "package"}) for e in __get_soups(f'{__URL_SEARCH}{search_term}')]
