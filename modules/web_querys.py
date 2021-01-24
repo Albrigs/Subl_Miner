@@ -8,7 +8,7 @@ from os import getenv
 __URL_BASE = 'https://packagecontrol.io/'
 __URL_SEARCH = f'{__URL_BASE}search/'
 __URL_PACKAGES = f'{__URL_BASE}packages/'
-__PKGS_FOLDER = getenv('HOME')+"/.config/sublime-text-3/Packages/"
+PKGS_FOLDER = getenv('HOME')+"/.config/sublime-text-3/Packages/"
 
 
 
