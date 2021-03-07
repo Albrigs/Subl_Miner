@@ -17,9 +17,9 @@ def generate_package_save():
 	print(f'Your save file is in {file_path}')
 
 def read_package_save(target=0):
-	
+
 	target = expanduser("~")+'/sublime_pkgs.txt'
-	
+
 	file = open(target)
 	content = file.read().split('\n')
 	file.close()
@@ -27,13 +27,3 @@ def read_package_save(target=0):
 	return content
 
 read_package_save()
-"""
-	SublimePythonIDE
-	Color​Hints
-	File​Icons
-	Terminal​View
-	SublimeColorSchemeSelector
-	SideBarEnhancements
-	Sublime-AdvancedNewFile
-	Normalize Indentation
-"""

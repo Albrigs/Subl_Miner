@@ -1,0 +1,8 @@
+beautifulsoup4==4.9.3
+prompt-toolkit==1.0.14
+Pygments==2.8.1
+PyInquirer==1.0.3
+regex==2020.11.13
+six==1.15.0
+soupsieve==2.2
+wcwidth==0.2.5

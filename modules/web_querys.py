@@ -21,7 +21,6 @@ def __get_soups(url):
 
 	pagination = soup[0].find('nav', attrs={'class': 'pagination'})
 	if pagination:
-		
 		pagination = pagination.find_all('a')
 		pagination = len(pagination)+1
 		soup = []
@@ -48,7 +47,7 @@ def search_pkg(search_term):
 
 	soups = [ e.find_all("li", attrs={"class": "package"}) for e in __get_soups(f'{__URL_SEARCH}{search_term}')]
 	res = []
-	for soup in soups: 
+	for soup in soups:
 		for s in soup:
 			installs = s.find('span', attrs = {'class':"installs"}).text.split()[0]
 			name = s.text.split('by')[0].strip()
@@ -66,14 +65,14 @@ def search_pkg(search_term):
 def get_url_download(url):
 	list_item = __get_one_soup(url).find('li', attrs={'class':'homepage'})
 	home_link = list_item.find('a')['href']
-	
+
 	list_item = __get_one_soup(url).find('li', attrs={'class':'issues'})
 	issues_link = list_item.find('a')['href']
 
 	res = 0
-	if is_github(home_link): 
+	if is_github(home_link):
 		res = download_link_github(home_link)
-	if is_github(issues_link): 
+	if is_github(issues_link):
 		res = download_link_github(
 			issues_link.replace('/issues','')
 			)

@@ -32,11 +32,11 @@ By {e['author']} | Downloads: {e['installs']}
 		#ADD NEXT and previous
 		tmp = stringfyed_results[slice_start:slice_end]
 		if i != 0: tmp.insert(0, "<< Previous Page")
-		
-		
+
+
 		if slice_end < len(stringfyed_results): tmp.append("Next Page >>")
 		sliced_results.append(tmp)
-		
+
 		slice_start = slice_start + 5
 		slice_end = slice_end + 5
 
@@ -54,7 +54,7 @@ By {e['author']} | Downloads: {e['installs']}
 
 	cur_page = 0
 	response = ""
-	
+
 	while "<<" in response or ">>" in response or not response:
 		__clear_console()
 		response = prompt(questions[cur_page])['package']
