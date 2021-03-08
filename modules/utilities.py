@@ -4,6 +4,9 @@ from os import remove as delete_file
 from os import rename, listdir
 from re import sub as subst
 from time import sleep
+from json import load as load_json
+from os.path import expanduser
+
 
 def int_installs(txt):
 	txt = txt.lower()
@@ -34,3 +37,19 @@ def unzip(path_in, path_out):
 
 
 	rename(new_folder, new_folder.replace('-master',''))
+
+
+def gen_subl_pckg_list():
+	config_file = expanduser('~') + '/.config/sublime-text-3/Packages/User/Package Control.sublime-settings'
+
+
+	installed_packages = 0
+	with open(config_file, 'r') as file:
+		installed_packages = load_json(file)['installed_packages']
+		file.close()
+
+	installed_packages = '\n'.join(installed_packages)
+
+
+	with open(expanduser('~')+'/subl_pkgs.txt', 'w') as file:
+		file.write(installed_packages)
