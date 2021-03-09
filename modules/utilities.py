@@ -9,23 +9,38 @@ from os.path import expanduser, isfile
 
 
 config_file = expanduser('~') + '/.config/sublime-text-3/Packages/User/Package Control.sublime-settings'
-save_file = expanduser('~')+'/subl_pkgs.txt'
+save_file = expanduser('~') + '/subl_pkgs.txt'
 
 def int_installs(txt):
+	"""
+	Reduce quantity of zeros
+	"""
 	txt = txt.lower()
 	k = Counter(txt)['k']
 	quantity = int(subst('[^0-9]','', txt))
 	quantity = quantity * pow(1000, k)
 	return quantity
 
-def convert_spaces(string): return string.replace(' ', '%20')
-def is_github(url): return url.startswith('https://github.com/')
+def convert_spaces(string):
+	"""
+	"""
+	return string.replace(' ', '%20')
+
+def is_github(url):
+	"""
+	"""
+	return url.startswith('https://github.com/')
 
 def download_link_github(url):
+	"""
+	Convert a github link into a download from root of master
+	"""
 	link = f'{url}/archive/master.zip'
 	return link
 
 def unzip(path_in, path_out):
+	"""
+	"""
 	old_content=set(listdir(path_out))
 
 	with ZipFile(path_in, 'r') as file:
@@ -43,7 +58,8 @@ def unzip(path_in, path_out):
 
 
 def gen_subl_pckg_list():
-
+	"""
+	"""
 	installed_packages = []
 	with open(config_file, 'r') as file:
 		installed_packages = load_json(file)['installed_packages']
@@ -57,6 +73,8 @@ def gen_subl_pckg_list():
 		file.close()
 
 def read_pckg_save():
+	"""
+	"""
 	pkgs = []
 	if isfile(save_file):
 		with open(save_file, 'r') as file:

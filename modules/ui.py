@@ -4,16 +4,24 @@ from os import system as terminal
 
 
 def __clear_console():
+	"""
+	Clear the console XD
+	"""
 	terminal('clear')
 
+
 def search_ui(result):
+	"""
+	Show results of a search
+	result: result of a search
+	"""
 	if not result:
 		print('Sem resultados')
 		return
 
 	result = sorted(result, key=lambda e: e['int_installs'], reverse=True)
 
-	stringfyed_results = [ 
+	stringfyed_results = [
 f"""-----------------------------------------------
 ||{e['name']}||
 By {e['author']} | Downloads: {e['installs']}
@@ -43,6 +51,7 @@ By {e['author']} | Downloads: {e['installs']}
 	del stringfyed_results
 
 
+	#selection screen
 	questions = [
 	[{
 	'type': 'list',

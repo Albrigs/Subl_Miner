@@ -13,14 +13,24 @@ PKGS_FOLDER = getenv('HOME')+"/.config/sublime-text-3/Packages/"
 
 
 def __get_one_soup(url):
+	"""
+	Get one HTML content warped in a soup
+	url: targeted URL
+	"""
 	html = get(url).text
 	return BeautifulSoup(html, 'lxml')
 
 def __get_soups(url):
+	"""
+	Return soups from paginated search result
+	url: url of search
+	"""
 	soup = [__get_one_soup(url)]
 
+	#Verify if search has a pagination
 	pagination = soup[0].find('nav', attrs={'class': 'pagination'})
 	if pagination:
+		#Find all result pages
 		pagination = pagination.find_all('a')
 		pagination = len(pagination)+1
 		soup = []
@@ -32,10 +42,18 @@ def __get_soups(url):
 	return soup
 
 def __page_exists(url):
+	"""
+	Return if a page exists or not
+	url: targeted url
+	"""
 	req = get(url)
 	return req.status_code == 200
 
 def get_first_pkg(search_term):
+	"""
+	Return the first pckg of a search
+	search_term: self explain
+	"""
 	soup = __get_one_soup(f'{__URL_SEARCH}{search_term}')
 	soup = soup.find("li", attrs={"class": "package"})
 	name = soup.text.split('by')[0].strip()
@@ -44,6 +62,10 @@ def get_first_pkg(search_term):
 	return name, res
 
 def search_pkg(search_term):
+	"""
+	Initial search interface return a map
+	search_term: self explained
+	"""
 
 	soups = [ e.find_all("li", attrs={"class": "package"}) for e in __get_soups(f'{__URL_SEARCH}{search_term}')]
 	res = []
@@ -63,6 +85,10 @@ def search_pkg(search_term):
 	return res
 
 def get_url_download(url):
+	"""
+	Return a github download page from a page
+	url: targeted page
+	"""
 	list_item = __get_one_soup(url).find('li', attrs={'class':'homepage'})
 	home_link = list_item.find('a')['href']
 
@@ -86,6 +112,9 @@ def get_url_download(url):
 
 
 def download_from_url(url, chunk_size=128):
+	"""
+	Download a file from a url
+	"""
 	req = get(url, stream=True)
 	tmp_zip = __PKGS_FOLDER+'tmp.zip'
 	with open( tmp_zip, 'wb') as file:
