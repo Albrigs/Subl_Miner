@@ -59,6 +59,8 @@ def get_first_pkg(search_term):
 	name = soup.text.split('by')[0].strip()
 	res = __URL_PACKAGES+convert_spaces(name)
 	res = get_url_download(res)
+
+	print(res)
 	return name, res
 
 def search_pkg(search_term):
@@ -89,11 +91,17 @@ def get_url_download(url):
 	Return a github download page from a page
 	url: targeted page
 	"""
-	list_item = __get_one_soup(url).find('li', attrs={'class':'homepage'})
-	home_link = list_item.find('a')['href']
+	page_soup = __get_one_soup(url)
+	list_item = page_soup.find('li', attrs={'class':'homepage'})
 
-	list_item = __get_one_soup(url).find('li', attrs={'class':'issues'})
-	issues_link = list_item.find('a')['href']
+	home_link = ''
+	if list_item:
+		home_link =	list_item.find('a')['href']
+
+	issues_link = ''
+	list_item = page_soup.find('li', attrs={'class':'issues'})
+	if list_item:
+		issues_link = list_item.find('a')['href']
 
 	res = 0
 	if is_github(home_link):

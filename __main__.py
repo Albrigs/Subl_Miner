@@ -30,6 +30,8 @@ if args.i:
 if args.r:
 	f_path = validate_file(args.r)
 	res = read_pckg_save(f_path)
+
+	res = [get_first_pkg(e) for e in res]
 	print(res)
 
 if args.g:
