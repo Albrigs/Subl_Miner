@@ -21,7 +21,9 @@ args = parser.parse_args()
 if args.s:
 	res = search_pkg(args.s)
 	url = search_ui(res)
-	print(url)
+	if url:
+		download_from_url(url)
+		print("Finished")
 
 if args.i:
 	name, res = get_first_pkg(args.i)
@@ -35,8 +37,9 @@ if args.r:
 	for name, url in res:
 		if url:
 			download_from_url(url)
+			print(f"{name}: ok")
 		else:
-			print(name)
+			print(f"{name}: repository not find")
 
 if args.g:
 	d_path = validate_dir(args.g)

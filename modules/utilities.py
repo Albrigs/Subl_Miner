@@ -67,6 +67,7 @@ def gen_subl_pckg_list(d_path):
 	installed_packages = []
 	with open(config_file, 'r') as file:
 		installed_packages = load_json(file)['installed_packages']
+		installed_packages.remove('Package Control')
 		file.close()
 
 	installed_packages = '\n'.join(installed_packages)
