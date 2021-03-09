@@ -1,6 +1,7 @@
 from modules import *
 from argparse import ArgumentParser
 from pprint import pprint
+from os.path import abspath, isfile
 
 parser = ArgumentParser()
 
@@ -9,12 +10,10 @@ parser.add_argument('-i', help='Install first package of a search.')
 parser.add_argument(
 	'-r',
 	help='Read package config file and install listed files.',
-	action="store_true"
 	)
 parser.add_argument(
 	'-g',
 	help='Generate a file with a list of all installed packages.',
-	action="store_true"
 	)
 
 args = parser.parse_args()
@@ -29,8 +28,11 @@ if args.i:
 	print(f'{name} {res}')
 
 if args.r:
-	res = read_pckg_save()
+	f_path = validate_file(args.r)
+	res = read_pckg_save(f_path)
 	print(res)
 
 if args.g:
-	gen_subl_pckg_list()
+	d_path = validate_dir(args.g)
+	if d_path:
+		gen_subl_pckg_list(d_path)

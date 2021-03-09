@@ -5,7 +5,7 @@ from os import rename, listdir
 from re import sub as subst
 from time import sleep
 from json import load as load_json
-from os.path import expanduser, isfile
+from os.path import expanduser, isfile, abspath, isdir
 
 
 config_file = expanduser('~') + '/.config/sublime-text-3/Packages/User/Package Control.sublime-settings'
@@ -57,9 +57,13 @@ def unzip(path_in, path_out):
 	rename(new_folder, new_folder.replace('-master',''))
 
 
-def gen_subl_pckg_list():
+def gen_subl_pckg_list(d_path):
 	"""
 	"""
+	if d_path[-1] != '/':
+		d_path = d_path+'/'
+
+	d_path = d_path + 'subl_pkgs.txt'
 	installed_packages = []
 	with open(config_file, 'r') as file:
 		installed_packages = load_json(file)['installed_packages']
@@ -68,19 +72,33 @@ def gen_subl_pckg_list():
 	installed_packages = '\n'.join(installed_packages)
 
 
-	with open(save_file, 'w') as file:
+	with open(d_path, 'w') as file:
 		file.write(installed_packages)
 		file.close()
 
-def read_pckg_save():
+def read_pckg_save(f_path):
 	"""
 	"""
 	pkgs = []
-	if isfile(save_file):
-		with open(save_file, 'r') as file:
+	if isfile(f_path):
+		with open(f_path, 'r') as file:
 			pkgs = file.readlines()
 			pkgs = [e.replace('\n', '') for e in pkgs]
 			file.close()
 		return pkgs
 	else:
-		return f'There is no {save_file}'
+		return f'There is no file subl_pkgs.txt'
+
+def validate_file(f_path):
+	f_path = abspath(f_path)
+	if isfile(f_path):
+		return f_path
+	else:
+		return 0
+
+def validate_dir(d_path):
+	d_path = abspath(d_path)
+	if isdir(d_path):
+		return d_path
+	else:
+		return 0
