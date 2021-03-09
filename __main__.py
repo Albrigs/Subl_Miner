@@ -8,5 +8,6 @@ parser.add_argument('-s', help='Search package')
 args = parser.parse_args()
 
 if args.s:
-	results = search_pkg(args.s)
-	pprint(results)
+	res = search_pkg(args.s)
+	url = search_ui(res)
+	print(url)

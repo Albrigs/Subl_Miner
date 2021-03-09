@@ -1,6 +1,7 @@
 from PyInquirer import prompt
 from math import ceil
 from os import system as terminal
+from .web_querys import get_url_download
 
 
 def __clear_console():
@@ -22,8 +23,7 @@ def search_ui(result):
 	result = sorted(result, key=lambda e: e['int_installs'], reverse=True)
 
 	stringfyed_results = [
-f"""-----------------------------------------------
-||{e['name']}||
+f"""||{e['name']}||
 By {e['author']} | Downloads: {e['installs']}
 {e['description'][:100]}
 -----------------------------------------------""" for e in result
