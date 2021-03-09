@@ -8,7 +8,8 @@ from os import getenv
 __URL_BASE = 'https://packagecontrol.io/'
 __URL_SEARCH = f'{__URL_BASE}search/'
 __URL_PACKAGES = f'{__URL_BASE}packages/'
-PKGS_FOLDER = getenv('HOME')+"/.config/sublime-text-3/Packages/"
+__PKGS_FOLDER = abspath(getenv('HOME')+"/.config/sublime-text-3/Packages/")
+#TODO detect this thing
 
 
 
@@ -60,7 +61,6 @@ def get_first_pkg(search_term):
 	res = __URL_PACKAGES+convert_spaces(name)
 	res = get_url_download(res)
 
-	print(res)
 	return name, res
 
 def search_pkg(search_term):

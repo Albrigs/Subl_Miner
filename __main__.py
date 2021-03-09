@@ -31,8 +31,12 @@ if args.r:
 	f_path = validate_file(args.r)
 	res = read_pckg_save(f_path)
 
-	res = [get_first_pkg(e) for e in res]
-	print(res)
+	res = tuple([get_first_pkg(e) for e in res])
+	for name, url in res:
+		if url:
+			download_from_url(url)
+		else:
+			print(name)
 
 if args.g:
 	d_path = validate_dir(args.g)
