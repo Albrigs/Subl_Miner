@@ -11,15 +11,19 @@ from os.path import abspath, isfile
 def main():
 	parser = ArgumentParser()
 
-	parser.add_argument('-s', help='Search package.')
-	parser.add_argument('-i', help='Install first package of a search.')
+	parser.add_argument('-s',
+		help='-s <search term> Install first package how match with your search.'
+		)
+	parser.add_argument('-i',
+		help='-i <package name> Install first package how match with your search.'
+		)
 	parser.add_argument(
 		'-r',
-		help='Read package config file and install listed files.',
+		help='-r <path of file> Read a file with your packages and install all of then.',
 		)
 	parser.add_argument(
 		'-g',
-		help='Generate a file with a list of all installed packages.',
+		help='-g <path where will be generated> Generate a file with your installed packages (use "." to gen in current folder)',
 		)
 
 	args = parser.parse_args()
