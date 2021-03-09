@@ -57,7 +57,7 @@ def unzip(path_in, path_out):
 	rename(new_folder, new_folder.replace('-master',''))
 
 
-def gen_subl_pckg_list(d_path):
+def gen_subl_pkg_list(d_path):
 	"""
 	"""
 	if d_path[-1] != '/':
@@ -77,7 +77,7 @@ def gen_subl_pckg_list(d_path):
 		file.write(installed_packages)
 		file.close()
 
-def read_pckg_save(f_path):
+def read_pkg_save(f_path):
 	"""
 	"""
 	pkgs = []

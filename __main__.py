@@ -31,10 +31,10 @@ if args.i:
 
 if args.r:
 	f_path = validate_file(args.r)
-	res = read_pckg_save(f_path)
+	res = read_pkg_save(f_path)
 
-	res = tuple([get_first_pkg(e) for e in res])
-	for name, url in res:
+	for pkg in res:
+		name, url = get_first_pkg(pkg)
 		if url:
 			download_from_url(url)
 			print(f"{name}: ok")
@@ -44,4 +44,4 @@ if args.r:
 if args.g:
 	d_path = validate_dir(args.g)
 	if d_path:
-		gen_subl_pckg_list(d_path)
+		gen_subl_pkg_list(d_path)

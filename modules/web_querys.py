@@ -52,7 +52,7 @@ def __page_exists(url):
 
 def get_first_pkg(search_term):
 	"""
-	Return the first pckg of a search
+	Return the first pkg of a search
 	search_term: self explain
 	"""
 	soup = __get_one_soup(f'{__URL_SEARCH}{search_term}')
